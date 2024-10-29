@@ -6,8 +6,8 @@ LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.description="RStudio image for Analytical Platform" \
       org.opencontainers.image.url="https://github.com/ministryofjustice/analytical-platform-rstudio"
 
-ENV RSTUDIO_VERSION="2024.09.0-375" \
-    RSTUDIO_SHA256="3aedf8c376352e426a6d43b77af1bc4346e176a429e5bf919c0e3ca19f4d48ed"
+ENV RSTUDIO_SERVER_VERSION="2024.09.0-375" \
+    RSTUDIO_SERVER_SHA256="efcc1c69252dd220b30973c7a10571707cfd47afc70c37c11a5e68efd2129feb"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
@@ -31,10 +31,10 @@ apt-get install --yes \
   "sudo"
 
 curl --location --fail-with-body \
-  "https://download2.rstudio.org/server/jammy/amd64/rstudio-server-${RSTUDIO_VERSION}-amd64.deb" \
+  "https://download2.rstudio.org/server/jammy/amd64/rstudio-server-${RSTUDIO_SERVER_VERSION}-amd64.deb" \
   --output "rstudio-server.deb"
 
-echo "${RSTUDIO_SHA256} rstudio-server.deb" | sha256sum --check
+echo "${RSTUDIO_SERVER_SHA256} rstudio-server.deb" | sha256sum --check
 
 apt-get install --yes ./rstudio-server.deb
 
