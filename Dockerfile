@@ -17,8 +17,6 @@ USER root
 COPY --chown="${CONTAINER_USER}:${CONTAINER_GROUP}" --chmod=0644 src${ANALYTICAL_PLATFORM_DIRECTORY}/first-run-notice.txt ${ANALYTICAL_PLATFORM_DIRECTORY}/first-run-notice.txt
 
 # RStudio
-COPY --chown=root:root --chmod=0644 src/etc/rstudio/rserver.conf /etc/rstudio/rserver.conf
-COPY --chown=root:root --chmod=0644 src/etc/rstudio/logging.conf /etc/rstudio/logging.conf
 RUN <<EOF
 apt-get update --yes
 
@@ -39,7 +37,18 @@ echo "${RSTUDIO_SERVER_SHA256} rstudio-server.deb" | sha256sum --check
 apt-get install --yes ./rstudio-server.deb
 
 rm --force --recursive rstudio-server.deb /var/lib/apt/lists/*
+
+# RStudio Server is started when installing
+# (https://docs.posit.co/ide/server-pro/server_management/core_administrative_tasks.html#stopping-and-starting)
+rstudio-server stop
+
+# RStudio DEBUG
+chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /var/lib/rstudio-server
+chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /var/run/rstudio-server
 EOF
+# COPY --chown=root:root --chmod=0644 src/etc/rstudio/env-vars /etc/rstudio/env-vars
+COPY --chown=root:root --chmod=0644 src/etc/rstudio/logging.conf /etc/rstudio/logging.conf
+COPY --chown=root:root --chmod=0644 src/etc/rstudio/rserver.conf /etc/rstudio/rserver.conf
 
 USER ${CONTAINER_USER}
 WORKDIR /home/${CONTAINER_USER}
@@ -47,4 +56,4 @@ EXPOSE 8080
 COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/healthcheck.sh /usr/local/bin/healthcheck.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD ["/usr/local/bin/healthcheck.sh"]
+# HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD ["/usr/local/bin/healthcheck.sh"]
