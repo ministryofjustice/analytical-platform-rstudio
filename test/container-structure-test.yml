@@ -19,6 +19,6 @@ fileExistenceTests:
     path: "/usr/local/bin/entrypoint.sh"
     shouldExist: true
 
-  # - name: "/usr/local/bin/healthcheck.sh"
-  #   path: "/usr/local/bin/healthcheck.sh"
-  #   shouldExist: true
+  - name: "/usr/local/bin/healthcheck.sh"
+    path: "/usr/local/bin/healthcheck.sh"
+    shouldExist: true
