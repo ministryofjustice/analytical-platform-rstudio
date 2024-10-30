@@ -46,9 +46,16 @@ rstudio-server stop
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /var/lib/rstudio-server
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /var/run/rstudio-server
 EOF
-# COPY --chown=root:root --chmod=0644 src/etc/rstudio/env-vars /etc/rstudio/env-vars
 COPY --chown=root:root --chmod=0644 src/etc/rstudio/logging.conf /etc/rstudio/logging.conf
 COPY --chown=root:root --chmod=0644 src/etc/rstudio/rserver.conf /etc/rstudio/rserver.conf
+
+### DEBUG
+RUN <<EOF
+# THIS WORKS
+echo "PATH=${PATH}:\${PATH}" > /etc/profile.d/10-global-path.sh
+# THIS DOES NOT WORK
+echo "ANALYTICAL_PLATFORM_DIRECTORY=${ANALYTICAL_PLATFORM_DIRECTORY}" > /etc/profile.d/20-analytical-platform.sh
+EOF
 
 USER ${CONTAINER_USER}
 WORKDIR /home/${CONTAINER_USER}
