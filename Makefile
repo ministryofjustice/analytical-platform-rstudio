@@ -7,7 +7,7 @@ TRIVY_DB_REPOSITORY ?= public.ecr.aws/aquasecurity/trivy-db:2
 TRIVY_JAVA_DB_REPOSITORY ?= public.ecr.aws/aquasecurity/trivy-java-db:1
 
 run: build
-	docker run --rm -it --publish 8080:8080 $(IMAGE_NAME):$(IMAGE_TAG)
+	docker run --rm -it --platform linux/amd64 --publish 8080:8080 $(IMAGE_NAME):$(IMAGE_TAG)
 
 test: build
 	container-structure-test test --platform linux/amd64 --config test/container-structure-test.yml --image $(IMAGE_NAME):$(IMAGE_TAG)
