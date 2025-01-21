@@ -40,6 +40,18 @@ docker pull --platform linux/amd64 ghcr.io/ministryofjustice/analytical-platform
 docker image inspect --format='{{index .RepoDigests 0}}' ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:$(curl --silent https://api.github.com/repos/ministryofjustice/analytical-platform-cloud-development-environment-base/releases/latest | jq -r .tag_name)
 ```
 
+### Base APT Packages
+
+The latest versions of the APT packages can be obtained by running the following
+
+```bash
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04 # TODO Should we change this to the APCBDE image?
+
+apt-get update
+
+apt-cache policy ${PACKAGE} # for example libssl-dev or psmisc
+```
+
 ### RStudio
 
 _TBC_
