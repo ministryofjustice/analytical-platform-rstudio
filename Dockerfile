@@ -22,11 +22,11 @@ apt-get update --yes
 
 # These packages are required for RStudio
 apt-get install --yes \
-  "libssl-dev" \
-  "psmisc" \
-  "libclang-dev" \
-  "lsb-release" \
-  "sudo"
+  "libssl-dev=3.0.13-0ubuntu3.4" \
+  "psmisc=23.7-1build1" \
+  "libclang-dev=1:18.0-59~exp2" \
+  "lsb-release=12.0-2" \
+  "sudo=1.9.15p5-3ubuntu5"
 
 curl --location --fail-with-body \
   "https://download2.rstudio.org/server/jammy/amd64/rstudio-server-${RSTUDIO_SERVER_VERSION}-amd64.deb" \
