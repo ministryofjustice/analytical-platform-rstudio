@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
-# TODO
-exit 0
+if [[ "$(curl --silent http://localhost:8080/api | grep RStudio)" == *"RStudio"* ]]; then
+  exit 0
+else
+  exit 1
+fi
