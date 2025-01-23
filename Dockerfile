@@ -46,6 +46,7 @@ rstudio-server stop
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /var/lib/rstudio-server
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /var/run/rstudio-server
 EOF
+
 COPY --chown=root:root --chmod=0644 src/etc/rstudio/logging.conf /etc/rstudio/logging.conf
 COPY --chown=root:root --chmod=0644 src/etc/rstudio/rserver.conf /etc/rstudio/rserver.conf
 

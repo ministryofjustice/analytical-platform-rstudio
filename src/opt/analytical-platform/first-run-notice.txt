@@ -1,5 +1,3 @@
 👋 Welcome! You are using the Ministry of Justice Analytical Platform RStudio image.
 
 🆘 If you need help or assistance, please raise an issue via GitHub (https://github.com/ministryofjustice/data-platform-support/issues/new/choose).
-
-🔍 To explore VS Code to its fullest, search using the Command Palette (Cmd/Ctrl + Shift + P or F1).
