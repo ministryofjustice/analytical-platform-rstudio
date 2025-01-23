@@ -1,0 +1,25 @@
+---
+schemaVersion: 2.0.0
+
+containerRunOptions:
+  user: "analyticalplatform"
+
+commandTests:
+  - name: "rstudio-server"
+    command: "rstudio-server"
+    args: ["version"]
+    expectedOutput:
+      ["2024.09.0\\+375 \\(Cranberry Hibiscus\\) for Ubuntu Jammy\\n"]
+
+fileExistenceTests:
+  - name: "/opt/analytical-platform/first-run-notice.txt"
+    path: "/opt/analytical-platform/first-run-notice.txt"
+    shouldExist: true
+
+  - name: "/usr/local/bin/entrypoint.sh"
+    path: "/usr/local/bin/entrypoint.sh"
+    shouldExist: true
+
+  - name: "/usr/local/bin/healthcheck.sh"
+    path: "/usr/local/bin/healthcheck.sh"
+    shouldExist: true
