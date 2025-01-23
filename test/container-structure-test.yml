@@ -8,7 +8,8 @@ commandTests:
   - name: "rstudio-server"
     command: "rstudio-server"
     args: ["version"]
-    expectedOutput: ["2024.09.0\\+375 \\(Cranberry Hibiscus\\) for Ubuntu Jammy\\n"]
+    expectedOutput:
+      ["2024.09.0\\+375 \\(Cranberry Hibiscus\\) for Ubuntu Jammy\\n"]
 
 fileExistenceTests:
   - name: "/opt/analytical-platform/first-run-notice.txt"

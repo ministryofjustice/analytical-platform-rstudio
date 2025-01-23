@@ -15,8 +15,5 @@
       ]
     }
   },
-  "forwardPorts": [
-    8080,
-    "localhost:8080"
-  ]
+  "forwardPorts": [8080, "localhost:8080"]
 }
